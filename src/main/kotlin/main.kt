@@ -1,6 +1,6 @@
 fun main() {
     println("Кол-во сек.: ")
-    var input = readLine()
+    val input = readLine()
     val time = input!!.toInt()
 
     when (time){
@@ -13,14 +13,25 @@ fun main() {
         in 604800..2678399 -> oneWeek(time)
         in 2678400..31622399 -> oneMonth(time)
         in 31622399..157679999 -> oneYear(time)
-        in 157680000..Int.MAX_VALUE -> println("несколько лет назад")
+        in 157680000..Int.MAX_VALUE -> println("A long time ago, in a galaxy far, far away…")
         else -> println("Неверные данные")
     }
 }
 
 fun oneHour(sec:Int){
     val time = ( sec / 60 )
-    println("$time минут назад")
+    val lastСharacter = time%10
+        if(time in 5..20){
+            println("$time минут назад")
+        } else {
+            if (lastСharacter == 1 ) {
+                println("$time минуту назад")
+            } else if (lastСharacter in 5..9 || lastСharacter == 0) {
+                println("$time минут назад")
+            } else{
+                println("$time минуты назад")
+            }
+        }
 }
 
 fun oneDay(sec:Int){
@@ -29,16 +40,43 @@ fun oneDay(sec:Int){
 }
 
 fun oneWeek(sec:Int){
-    val time = ( sec / 60 / 60 / 24 / 7 )
-    println("$time недель назад")
+    when (val time = ( sec / 60 / 60 / 24 / 7 )) {
+        1 -> {
+            println("$time неделю назад")
+        }
+        in 2..4 -> {
+            println("$time недели назад")
+        }
+        else -> {
+            println("$time недель назад")
+        }
+    }
 }
 
 fun oneMonth(sec:Int){
-    val time = ( sec / 60 / 60 / 24 / 30 )
-    println("$time месяц назад")
+    when (val time = ( sec / 60 / 60 / 24 / 30 )) {
+        in 2..4 -> {
+            println("$time месяца назад")
+        }
+        in 5..12 -> {
+            println("$time месяцев назад")
+        }
+        else -> {
+            println("$time месяц назад")
+        }
+    }
 }
 
 fun oneYear(sec:Int){
-    val time = ( sec / 60 / 60 / 24 / 30 / 12 )
-    println("$time лет назад")
+    when (val time = ( sec / 60 / 60 / 24 / 30 / 12 )) {
+        1 -> {
+            println("$time год назад")
+        }
+        in 2..4 -> {
+            println("$time года назад")
+        }
+        else -> {
+            println("$time лет назад")
+        }
+    }
 }
